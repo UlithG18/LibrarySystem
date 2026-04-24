@@ -1,0 +1,46 @@
+@model LibrarySystem.Models.Loan
+
+@{
+    ViewData["Title"] = "Detalle del Préstamo";
+}
+
+<div class="d-flex align-items-center mb-4 gap-3">
+    <a asp-action="Index" asp-controller="Loan" class="btn btn-ghost btn-sm">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+    <div>
+        <h4 class="fw-bold mb-0" style="font-size:1.1rem;"><i class="bi bi-arrow-left-right me-2" style="color:var(--accent);"></i>Detalle del préstamo</h4>
+        <small style="color:var(--muted);">Información del préstamo registrado</small>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <div style="display:grid; grid-template-columns: 110px 1fr; gap: 1rem 0.5rem; margin-bottom: 1.25rem;">
+                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Usuario</span>
+                    <span class="fw-semibold">@Model.User.Name</span>
+
+                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Teléfono</span>
+                    <span>@Model.User.Phone</span>
+
+                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Libro</span>
+                    <span>@Model.Book.Title</span>
+
+                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Fecha</span>
+                    <span style="color:var(--muted);">@Model.CreatedAt?.ToString("yyyy-MM-dd")</span>
+                </div>
+                <hr style="border-color:var(--border);" />
+                <div class="d-flex gap-2">
+                    <a asp-action="Edit" asp-controller="Loan" asp-route-id="@Model.Id" class="btn btn-accent btn-sm">
+                        <i class="bi bi-pencil me-1"></i>Editar
+                    </a>
+                    <a asp-action="Index" asp-controller="Loan" class="btn btn-ghost btn-sm">
+                        <i class="bi bi-arrow-left me-1"></i>Volver
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

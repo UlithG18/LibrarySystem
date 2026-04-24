@@ -1,0 +1,64 @@
+@model IEnumerable<LibrarySystem.Models.Loan>
+
+@{
+    ViewData["Title"] = "Préstamos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="fw-bold mb-0" style="font-size:1.1rem;"><i class="bi bi-arrow-left-right me-2" style="color:#fbbf24;"></i>Préstamos</h4>
+        <small style="color:var(--muted);">Registro de todos los préstamos activos</small>
+    </div>
+    <a asp-action="Create" asp-controller="Loan" class="btn btn-accent">
+        <i class="bi bi-plus-circle me-2"></i>Nuevo préstamo
+    </a>
+</div>
+
+@if (TempData["message"] != null)
+{
+    <div class="alert-ok p-3 mb-3 d-flex align-items-center gap-2">
+        <i class="bi bi-check-circle-fill"></i>@TempData["message"]
+    </div>
+}
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th style="padding-left:1.5rem;">Usuario</th>
+                    <th>Libro</th>
+                    <th>Fecha</th>
+                    <th style="text-align:right; padding-right:1.5rem;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var loan in Model)
+                {
+                    <tr>
+                        <td style="padding-left:1.5rem;">
+                            <i class="bi bi-person-circle me-2" style="color:var(--muted);"></i>@loan.User?.Name
+                        </td>
+                        <td>
+                            <i class="bi bi-book me-2" style="color:var(--muted);"></i>@loan.Book?.Title
+                        </td>
+                        <td style="color:var(--muted); font-size:0.85rem;">@loan.CreatedAt?.ToString("yyyy-MM-dd")</td>
+                        <td style="text-align:right; padding-right:1.5rem;">
+                            <form asp-action="Destroy" asp-controller="Loan" asp-route-id="@loan.Id" method="post" class="d-inline">
+                                <a asp-action="Show" asp-controller="Loan" asp-route-id="@loan.Id" class="btn btn-icon me-1" title="Ver">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a asp-action="Edit" asp-controller="Loan" asp-route-id="@loan.Id" class="btn btn-icon me-1" title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <button type="submit" class="btn btn-icon btn-icon-danger" title="Eliminar">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

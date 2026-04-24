@@ -1,0 +1,52 @@
+@model LibrarySystem.Models.Book
+
+@{
+    ViewData["Title"] = "Detalle del Libro";
+}
+
+<div class="d-flex align-items-center mb-4 gap-3">
+    <a asp-action="Index" asp-controller="Book" class="btn btn-ghost btn-sm">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+    <div>
+        <h4 class="fw-bold mb-0" style="font-size:1.1rem;"><i class="bi bi-book me-2" style="color:var(--accent);"></i>Detalle del libro</h4>
+        <small style="color:var(--muted);">Información completa del título</small>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <div style="display:grid; grid-template-columns: 120px 1fr; gap: 1rem 0.5rem; margin-bottom: 1.25rem;">
+                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600; align-self:center;">Título</span>
+                    <span class="fw-semibold">@Model.Title</span>
+
+                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600; align-self:center;">Autor</span>
+                    <span>@Model.Author</span>
+
+                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600; align-self:center;">Estado</span>
+                    <span>
+                        @if (Model.Available)
+                        {
+                            <span class="badge-avail"><i class="bi bi-circle-fill me-1" style="font-size:0.5rem;"></i>Disponible</span>
+                        }
+                        else
+                        {
+                            <span class="badge-unavail"><i class="bi bi-circle-fill me-1" style="font-size:0.5rem;"></i>No disponible</span>
+                        }
+                    </span>
+                </div>
+                <hr style="border-color:var(--border);" />
+                <div class="d-flex gap-2">
+                    <a asp-action="Edit" asp-controller="Book" asp-route-id="@Model.Id" class="btn btn-accent btn-sm">
+                        <i class="bi bi-pencil me-1"></i>Editar
+                    </a>
+                    <a asp-action="Index" asp-controller="Book" class="btn btn-ghost btn-sm">
+                        <i class="bi bi-arrow-left me-1"></i>Volver
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
