@@ -1,52 +1,53 @@
 @model LibrarySystem.Models.Book
+@{ ViewData["Title"] = "Add Book"; }
 
-@{
-    ViewData["Title"] = "Nuevo Libro";
-}
-
-<div class="d-flex align-items-center mb-4 gap-3">
-    <a asp-action="Index" asp-controller="Book" class="btn btn-ghost btn-sm">
-        <i class="bi bi-arrow-left"></i>
+<div style="margin-bottom: 2rem;">
+    <a asp-action="Index" asp-controller="Book" class="btn-back">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M10 3L5 8l5 5"/></svg>
+        Back to Catalog
     </a>
-    <div>
-        <h4 class="fw-bold mb-0" style="font-size:1.1rem;"><i class="bi bi-plus-circle me-2" style="color:var(--accent);"></i>Agregar nuevo libro</h4>
-        <small style="color:var(--muted);">Completa los datos para registrarlo en el catálogo</small>
-    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <div class="card">
-            <div class="card-body">
-                <form asp-action="Store" asp-controller="Book" method="post">
-                    <div class="mb-3">
-                        <label asp-for="Title" class="form-label">Título</label>
-                        <input asp-for="Title" class="form-control" type="text" placeholder="Ej: Cien años de soledad" />
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+    <div>
+        <p class="pg-eyebrow">02 — Books</p>
+        <h1 class="pg-title" style="font-size:2.5rem; margin-bottom:0.75rem;">Add a new<br/>book.</h1>
+        <p style="color:var(--sub); font-size:0.88rem; line-height:1.6;">
+            Fill in the book's details to add it to the library catalog. All fields are required.
+        </p>
+    </div>
+
+    <div class="card-custom">
+        <div class="card-custom-body">
+            <form asp-action="Store" asp-controller="Book" method="post">
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label class="field-label" asp-for="Title">Title</label>
+                        <input asp-for="Title" class="field-input" type="text" placeholder="e.g. One Hundred Years of Solitude" />
                     </div>
-                    <div class="mb-3">
-                        <label asp-for="Author" class="form-label">Autor</label>
-                        <input asp-for="Author" type="text" class="form-control" placeholder="Ej: Gabriel García Márquez" />
+                    <div class="field-group">
+                        <label class="field-label" asp-for="Author">Author</label>
+                        <input asp-for="Author" type="text" class="field-input" placeholder="e.g. Gabriel García Márquez" />
                     </div>
-                    <div class="mb-3">
-                        <label asp-for="Available" class="form-label">Disponibilidad</label>
-                        <input asp-for="Available" type="text" class="form-control" placeholder="true / false" />
+                    <div class="field-group">
+                        <label class="field-label" asp-for="Available">Available</label>
+                        <input asp-for="Available" type="text" class="field-input" placeholder="true / false" />
                     </div>
 
                     @if (TempData["message"] != null)
                     {
-                        <div class="alert-err p-3 mb-3 d-flex align-items-center gap-2">
-                            <i class="bi bi-exclamation-triangle-fill"></i>@TempData["message"]
+                        <div class="alert-error-custom">
+                            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2L1 14h14zM8 6v4M8 12v1"/></svg>
+                            @TempData["message"]
                         </div>
                     }
 
-                    <div class="d-flex gap-2 mt-4">
-                        <button type="submit" class="btn btn-accent">
-                            <i class="bi bi-floppy me-2"></i>Guardar libro
-                        </button>
-                        <a asp-action="Index" asp-controller="Book" class="btn btn-ghost">Cancelar</a>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary-custom">Save book</button>
+                        <a asp-action="Index" asp-controller="Book" class="btn-ghost-custom">Cancel</a>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

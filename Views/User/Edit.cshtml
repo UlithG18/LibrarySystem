@@ -1,45 +1,45 @@
 @model LibrarySystem.Models.User
+@{ ViewData["Title"] = "Edit Member"; }
 
-@{
-    ViewData["Title"] = "Editar Usuario";
-}
-
-<div class="d-flex align-items-center mb-4 gap-3">
-    <a asp-action="Index" asp-controller="User" class="btn btn-ghost btn-sm">
-        <i class="bi bi-arrow-left"></i>
+<div style="margin-bottom: 2rem;">
+    <a asp-action="Index" asp-controller="User" class="btn-back">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M10 3L5 8l5 5"/></svg>
+        Back to Members
     </a>
-    <div>
-        <h4 class="fw-bold mb-0" style="font-size:1.1rem;"><i class="bi bi-person-gear me-2" style="color:#fbbf24;"></i>Editar usuario</h4>
-        <small style="color:var(--muted);">Actualiza la información del miembro</small>
-    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <div class="card">
-            <div class="card-body">
-                <form asp-action="Update" asp-controller="User" method="post">
-                    <input type="hidden" asp-for="Id" />
-                    <div class="mb-3">
-                        <label class="form-label">Nombre completo</label>
-                        <input type="text" class="form-control" asp-for="Name" />
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+    <div>
+        <p class="pg-eyebrow" style="color:#00bfff;">01 — Members</p>
+        <h1 class="pg-title" style="font-size:2.5rem; margin-bottom:0.75rem;">Edit member<br/>record.</h1>
+        <p style="color:var(--sub); font-size:0.88rem; line-height:1.6;">
+            Update contact details or other info for this member.
+        </p>
+    </div>
+
+    <div class="card-custom">
+        <div class="card-custom-body">
+            <form asp-action="Update" asp-controller="User" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label class="field-label">Full name</label>
+                        <input type="text" class="field-input" asp-for="Name" />
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Correo electrónico</label>
-                        <input type="text" class="form-control" asp-for="Email" />
+                    <div class="field-group">
+                        <label class="field-label">Email</label>
+                        <input type="text" class="field-input" asp-for="Email" />
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Teléfono</label>
-                        <input type="text" class="form-control" asp-for="Phone" />
+                    <div class="field-group">
+                        <label class="field-label">Phone</label>
+                        <input type="text" class="field-input" asp-for="Phone" />
                     </div>
-                    <div class="d-flex gap-2 mt-4">
-                        <button class="btn btn-accent">
-                            <i class="bi bi-floppy me-2"></i>Actualizar
-                        </button>
-                        <a asp-action="Index" asp-controller="User" class="btn btn-ghost">Cancelar</a>
+                    <div class="form-actions">
+                        <button class="btn-primary-custom">Save changes</button>
+                        <a asp-action="Index" asp-controller="User" class="btn-ghost-custom">Cancel</a>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

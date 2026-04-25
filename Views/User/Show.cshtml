@@ -1,48 +1,42 @@
 @model LibrarySystem.Models.User
+@{ ViewData["Title"] = "Member Profile"; }
 
-@{
-    ViewData["Title"] = "Perfil del Usuario";
-}
-
-<div class="d-flex align-items-center mb-4 gap-3">
-    <a asp-action="Index" asp-controller="User" class="btn btn-ghost btn-sm">
-        <i class="bi bi-arrow-left"></i>
+<div style="margin-bottom: 2rem;">
+    <a asp-action="Index" asp-controller="User" class="btn-back">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M10 3L5 8l5 5"/></svg>
+        Back to Members
     </a>
-    <div>
-        <h4 class="fw-bold mb-0" style="font-size:1.1rem;"><i class="bi bi-person me-2" style="color:#60a5fa;"></i>Perfil del usuario</h4>
-        <small style="color:var(--muted);">Datos del miembro registrado</small>
-    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="text-center mb-4">
-                    <div style="width:64px; height:64px; border-radius:50%; background:rgba(59,130,246,0.12); display:inline-flex; align-items:center; justify-content:center; margin-bottom:0.75rem;">
-                        <i class="bi bi-person" style="font-size:1.75rem; color:#60a5fa;"></i>
-                    </div>
-                    <h5 class="fw-bold mb-0">@Model.Name</h5>
-                </div>
-                <div style="display:grid; grid-template-columns: 110px 1fr; gap: 1rem 0.5rem; margin-bottom: 1.25rem;">
-                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Nombre</span>
-                    <span class="fw-semibold">@Model.Name</span>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+    <div>
+        <p class="pg-eyebrow" style="color:#00bfff;">01 — Members</p>
+        <h1 class="pg-title" style="font-size:2.5rem; margin-bottom:0.75rem;">Member<br/>Profile</h1>
+        <p style="color:var(--sub); font-size:0.88rem; line-height:1.6;">Contact details and record for this library member.</p>
+    </div>
 
-                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Correo</span>
-                    <span>@Model.Email</span>
-
-                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Teléfono</span>
-                    <span>@Model.Phone</span>
+    <div class="card-custom">
+        <div class="card-custom-body">
+            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border);">
+                <div style="width:48px; height:48px; border-radius:10px; background:rgba(0,191,255,0.12); border:1px solid rgba(0,191,255,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    <svg width="22" height="22" viewBox="0 0 16 16" fill="#00bfff"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
                 </div>
-                <hr style="border-color:var(--border);" />
-                <div class="d-flex gap-2">
-                    <a asp-action="Edit" asp-controller="User" asp-route-id="@Model.Id" class="btn btn-accent btn-sm">
-                        <i class="bi bi-pencil me-1"></i>Editar
-                    </a>
-                    <a asp-action="Index" asp-controller="User" class="btn btn-ghost btn-sm">
-                        <i class="bi bi-arrow-left me-1"></i>Volver
-                    </a>
+                <div>
+                    <div style="font-family:'Syne',sans-serif; font-weight:800; font-size:1.1rem; color:var(--text);">@Model.Name</div>
+                    <div style="font-size:0.8rem; color:var(--sub);">Library member</div>
                 </div>
+            </div>
+            <div class="detail-grid">
+                <div class="dk">Name</div>
+                <div class="dv">@Model.Name</div>
+                <div class="dk">Email</div>
+                <div class="dv">@Model.Email</div>
+                <div class="dk">Phone</div>
+                <div class="dv">@Model.Phone</div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+                <a asp-action="Edit" asp-controller="User" asp-route-id="@Model.Id" class="btn-primary-custom" style="font-size:0.78rem; padding:8px 16px;">Edit record</a>
+                <a asp-action="Index" asp-controller="User" class="btn-ghost-custom" style="font-size:0.78rem; padding:8px 16px;">Go back</a>
             </div>
         </div>
     </div>

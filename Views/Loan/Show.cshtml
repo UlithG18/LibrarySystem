@@ -1,45 +1,35 @@
 @model LibrarySystem.Models.Loan
+@{ ViewData["Title"] = "Loan Details"; }
 
-@{
-    ViewData["Title"] = "Detalle del Préstamo";
-}
-
-<div class="d-flex align-items-center mb-4 gap-3">
-    <a asp-action="Index" asp-controller="Loan" class="btn btn-ghost btn-sm">
-        <i class="bi bi-arrow-left"></i>
+<div style="margin-bottom: 2rem;">
+    <a asp-action="Index" asp-controller="Loan" class="btn-back">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M10 3L5 8l5 5"/></svg>
+        Back to Loans
     </a>
-    <div>
-        <h4 class="fw-bold mb-0" style="font-size:1.1rem;"><i class="bi bi-arrow-left-right me-2" style="color:var(--accent);"></i>Detalle del préstamo</h4>
-        <small style="color:var(--muted);">Información del préstamo registrado</small>
-    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <div class="card">
-            <div class="card-body">
-                <div style="display:grid; grid-template-columns: 110px 1fr; gap: 1rem 0.5rem; margin-bottom: 1.25rem;">
-                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Usuario</span>
-                    <span class="fw-semibold">@Model.User.Name</span>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+    <div>
+        <p class="pg-eyebrow" style="color:#ffb930;">03 — Loans</p>
+        <h1 class="pg-title" style="font-size:2.5rem; margin-bottom:0.75rem;">Loan<br/>Details</h1>
+        <p style="color:var(--sub); font-size:0.88rem; line-height:1.6;">Full record for this lending transaction.</p>
+    </div>
 
-                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Teléfono</span>
-                    <span>@Model.User.Phone</span>
-
-                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Libro</span>
-                    <span>@Model.Book.Title</span>
-
-                    <span style="color:var(--muted); font-size:0.82rem; font-weight:600;">Fecha</span>
-                    <span style="color:var(--muted);">@Model.CreatedAt?.ToString("yyyy-MM-dd")</span>
-                </div>
-                <hr style="border-color:var(--border);" />
-                <div class="d-flex gap-2">
-                    <a asp-action="Edit" asp-controller="Loan" asp-route-id="@Model.Id" class="btn btn-accent btn-sm">
-                        <i class="bi bi-pencil me-1"></i>Editar
-                    </a>
-                    <a asp-action="Index" asp-controller="Loan" class="btn btn-ghost btn-sm">
-                        <i class="bi bi-arrow-left me-1"></i>Volver
-                    </a>
-                </div>
+    <div class="card-custom">
+        <div class="card-custom-body">
+            <div class="detail-grid">
+                <div class="dk">Member</div>
+                <div class="dv">@Model.User.Name</div>
+                <div class="dk">Phone</div>
+                <div class="dv">@Model.User.Phone</div>
+                <div class="dk">Book</div>
+                <div class="dv">@Model.Book.Title</div>
+                <div class="dk">Date</div>
+                <div class="dv" style="font-family:'DM Mono',monospace; font-size:0.85rem; color:var(--sub);">@Model.CreatedAt?.ToString("yyyy-MM-dd")</div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+                <a asp-action="Edit" asp-controller="Loan" asp-route-id="@Model.Id" class="btn-primary-custom" style="font-size:0.78rem; padding:8px 16px;">Edit record</a>
+                <a asp-action="Index" asp-controller="Loan" class="btn-ghost-custom" style="font-size:0.78rem; padding:8px 16px;">Go back</a>
             </div>
         </div>
     </div>

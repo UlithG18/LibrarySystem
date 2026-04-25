@@ -1,64 +1,58 @@
 @model IEnumerable<LibrarySystem.Models.Loan>
+@{ ViewData["Title"] = "Loans"; }
 
-@{
-    ViewData["Title"] = "Préstamos";
-}
-
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h4 class="fw-bold mb-0" style="font-size:1.1rem;"><i class="bi bi-arrow-left-right me-2" style="color:#fbbf24;"></i>Préstamos</h4>
-        <small style="color:var(--muted);">Registro de todos los préstamos activos</small>
+<div class="pg-header">
+    <div class="pg-header-left">
+        <p class="pg-eyebrow" style="color:#ffb930;">03 — Loans</p>
+        <h1 class="pg-title">Loans</h1>
+        <p class="pg-sub">All active book loans and lending records</p>
     </div>
-    <a asp-action="Create" asp-controller="Loan" class="btn btn-accent">
-        <i class="bi bi-plus-circle me-2"></i>Nuevo préstamo
+    <a asp-action="Create" asp-controller="Loan" class="btn-primary-custom">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v14M1 8h14"/></svg>
+        New loan
     </a>
 </div>
 
 @if (TempData["message"] != null)
 {
-    <div class="alert-ok p-3 mb-3 d-flex align-items-center gap-2">
-        <i class="bi bi-check-circle-fill"></i>@TempData["message"]
+    <div class="alert-success-custom">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M2 8l4 4 8-8"/></svg>
+        @TempData["message"]
     </div>
 }
 
-<div class="card">
-    <div class="table-responsive">
-        <table class="table mb-0">
-            <thead>
+<div class="card-custom">
+    <table class="stacks-table">
+        <thead>
+            <tr>
+                <th>Member</th>
+                <th>Book</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in Model)
+            {
                 <tr>
-                    <th style="padding-left:1.5rem;">Usuario</th>
-                    <th>Libro</th>
-                    <th>Fecha</th>
-                    <th style="text-align:right; padding-right:1.5rem;">Acciones</th>
+                    <td class="td-main">@loan.User?.Name</td>
+                    <td class="td-sub">@loan.Book?.Title</td>
+                    <td><span style="font-family:'DM Mono',monospace; font-size:0.8rem; color:var(--sub);">@loan.CreatedAt?.ToString("yyyy-MM-dd")</span></td>
+                    <td>
+                        <form asp-action="Destroy" asp-controller="Loan" asp-route-id="@loan.Id" method="post" style="display:inline;">
+                            <a asp-action="Show" asp-controller="Loan" asp-route-id="@loan.Id" class="tbl-action" title="View">
+                                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4 3 1 8 1 8s3 5 7 5 7-5 7-5-3-5-7-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg>
+                            </a>
+                            <a asp-action="Edit" asp-controller="Loan" asp-route-id="@loan.Id" class="tbl-action" title="Edit" style="margin: 0 4px;">
+                                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.1 1.9a2 2 0 012.8 2.8L4.8 13.8 1 14.8l1-3.8z"/></svg>
+                            </a>
+                            <button type="submit" class="tbl-action danger" title="Delete">
+                                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 4h12M6 4V2h4v2M5 4v9h6V4"/></svg>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var loan in Model)
-                {
-                    <tr>
-                        <td style="padding-left:1.5rem;">
-                            <i class="bi bi-person-circle me-2" style="color:var(--muted);"></i>@loan.User?.Name
-                        </td>
-                        <td>
-                            <i class="bi bi-book me-2" style="color:var(--muted);"></i>@loan.Book?.Title
-                        </td>
-                        <td style="color:var(--muted); font-size:0.85rem;">@loan.CreatedAt?.ToString("yyyy-MM-dd")</td>
-                        <td style="text-align:right; padding-right:1.5rem;">
-                            <form asp-action="Destroy" asp-controller="Loan" asp-route-id="@loan.Id" method="post" class="d-inline">
-                                <a asp-action="Show" asp-controller="Loan" asp-route-id="@loan.Id" class="btn btn-icon me-1" title="Ver">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <a asp-action="Edit" asp-controller="Loan" asp-route-id="@loan.Id" class="btn btn-icon me-1" title="Editar">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <button type="submit" class="btn btn-icon btn-icon-danger" title="Eliminar">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
 </div>
